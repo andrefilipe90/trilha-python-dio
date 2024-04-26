@@ -14,16 +14,16 @@ extrato = " Extrato "
 sair = " Sair "
 
 menu = f"""
-[1] {depositar.center(18,"#")}
-[2] {sacar.center(18,"#")}
-[3] {extrato.center(18,"#")}
-[4] {sair.center(18,"#")}
+[1] {depositar.center(26,"#")}
+[2] {sacar.center(26,"#")}
+[3] {extrato.center(26,"#")}
+[4] {sair.center(26,"#")}
 
 => """
 
 saldo = 0
 limite = 500
-extrato = ""
+extrato_bancario = ""
 numero_saques = 0
 LIMITE_SAQUES = 3
 
@@ -39,7 +39,7 @@ while True:
             #agrega saldo, agrega listagem extrato, resultado em tela
             limpar_tela()
             saldo += valor
-            extrato += f"Depósito: R$ {valor:.2f}\n"
+            extrato_bancario += f"Depósito: R$ {valor:.2f}\n"
             print(f"valor R$ {valor:.2f} depositado com sucesso.")
         #implementar condicao para tratar caracteres nao numericos
         #resultado erro em tela para valores negativos
@@ -55,23 +55,25 @@ while True:
         excedeu_limite = valor > limite
 
         excedeu_saques = numero_saques >= LIMITE_SAQUES
-        print(valor,excedeu_saldo,excedeu_limite,excedeu_saques)
+
         if excedeu_saldo:
             limpar_tela()
             print("Operação falhou! Você não tem saldo suficiente.")
+            print(f"O saldo atual é {saldo}")
 
         elif excedeu_limite:
             limpar_tela()
             print("Operação falhou! O valor do saque excede o limite.")
+            print("Seu limite por operação é de 500 Reais.")
 
         elif excedeu_saques:
             limpar_tela()
-            print("Operação falhou! Número máximo de saques excedido.")
+            print("Operação falhou! Número máximo de 3 saques atingido.")
 
         elif valor > 0:
             saldo -= valor
             limpar_tela()
-            extrato += f"Saque: R$ {valor:.2f}\n"
+            extrato_bancario += f"Saque: R$ {valor:.2f}\n"
             print(f"valor R$ {valor:.2f} sacado com sucesso.")
             numero_saques += 1
 
@@ -81,13 +83,10 @@ while True:
 
     elif opcao == "3":
         limpar_tela()
-        print(f"{extrato}")
-        #print(f"""
-        #      \n{extrato.center(18,"#")}
-        #      """)
-        print("Não foram realizadas movimentações." if not extrato else extrato)
+        print(f"{extrato.center(30,"#")}")
+        print("Não foram realizadas movimentações." if not extrato_bancario else extrato_bancario)
         print(f"\nSaldo: R$ {saldo:.2f}")
-        print("==========================================")
+        print(f"{extrato.center(30,"#")}")
 
     elif opcao == "4":
         break
