@@ -1,0 +1,1 @@
+#dicionarios é um conjunto de pares chave(imutável):valor
