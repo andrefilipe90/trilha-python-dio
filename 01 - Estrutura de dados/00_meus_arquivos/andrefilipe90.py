@@ -15,7 +15,6 @@ lista_contas = [{"conta":1,
                  "cpf":"05843914712",
                  "saldo":100,
                  "cheque_especial":100}] #definir tipo
-
 cad_usuario = " Cadastro Usuario "
 cad_conta = " Cadastro Conta "
 depositar = " Depositar "
@@ -24,38 +23,61 @@ extrato = " Extrato "
 sair = " Sair "
 
 menu = f"""
+##############################
+
 [1] {cad_usuario.center(26,"#")}
 [2] {cad_conta.center(26,"#")}
 [3] {depositar.center(26,"#")}
 [4] {sacar.center(26,"#")}
 [5] {extrato.center(26,"#")}
 [6] {sair.center(26,"#")}
+
 => """
 
 def cadastrar_usuario():
+    limpa_tela()
     #definir atividades
-    tmp_cpf: input("digite o numero do CPF:\n")
+    temp_cpf = str(input("informe o CPF:"))
+    for usuario in lista_usuarios:
+        #habilitar validação de CPF com regras de existencia de CPF.
+        if usuario["cpf"] == temp_cpf:
+            print("CPF já registrado no sistema.")
+            # habilitar reescrever e apagar conta.
+            return
+        if len(temp_cpf) < 11:
+            print("CPF muito curto.")
+            return
+    temp_nome = input("Informe o nome:")
+    temp_nascimento = input("informe a data de nascimento dd/mm/aaaa:")
+    temp_endereco = input("informe o endereço: rua, nº - bairro - cidade/ES:")
+    temp_dict = {"cpf":temp_cpf,"nome":temp_nome,"nascimento":temp_nascimento,"endereço":temp_endereco}
+    lista_usuarios.append(temp_dict)
+
     return
 
 def cadastrar_conta():
+    limpa_tela()
     #definir atividades
     print(lista_contas[0],lista_usuarios[0]["cpf"])
-    
     return
 
 def sacar():
+    limpa_tela()
     #definir atividades
     return
 
 def depositar():
+    limpa_tela()
     #definir atividades
     return
 
 def imprimir():
+    limpa_tela()
     #definir atividades
     return
 
 def saindo(nome):
+    limpa_tela()
     if nome is True:
         print(f"{nome}, foi um prazer ajudar você!")
     else:
@@ -73,6 +95,13 @@ while True:
         sacar()
     elif opcao == "5":
         imprimir()
+    elif opcao == "7":
+        limpa_tela()
+        for usuario in lista_usuarios:
+            print(usuario)
+        print("\n#########################\n")
+        for conta in lista_contas:
+            print(conta)
     elif opcao == "6":
         saindo(nome_correntista)
         break
