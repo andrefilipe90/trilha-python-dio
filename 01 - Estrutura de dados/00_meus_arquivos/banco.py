@@ -8,6 +8,10 @@
 # usuario a uma conta, filtrar lista por CPF.
 '''rev01:
 
+parei na correção da linha 168, agencia key error
+falta adicionar extrato
+falta adicionar limite de saques diario
+
 as funcoes devem fazer passagem de argumentos por posicao e nomeados (variar os casos)
 
 Saque: argumentos: keyword only: saque(saldo="variavel_saldo"...)
@@ -32,7 +36,10 @@ lista_contas = [{"conta":1,
                  "agencia":"0001",
                  "cpf":"05843914712",
                  "saldo":100,
-                 "cheque_especial":100}] #definir tipo
+                 "cheque_especial":100,
+                 "n_saques":0
+                 "extrato":""
+                 }]
                  
 '''
 
