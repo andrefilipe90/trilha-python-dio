@@ -5,8 +5,16 @@ def limpa_tela():
 
 limpa_tela()
 
-lista_usuarios = []
-lista_contas = [] #definir tipo
+nome_correntista = False
+lista_usuarios = [{"cpf":"05843914712",
+                   "nome":"André Filipe Guering de Mattos",
+                   "nascimento":"14/05/1990",
+                   "endereço":"Rua Roberto Fritzgerald Kennedy,40 - Cavaleiros - Macaé/RJ"}]
+lista_contas = [{"conta":1,
+                 "agencia":"0001",
+                 "cpf":"05843914712",
+                 "saldo":100,
+                 "cheque_especial":100}] #definir tipo
 
 cad_usuario = " Cadastro Usuario "
 cad_conta = " Cadastro Conta "
@@ -24,22 +32,6 @@ menu = f"""
 [6] {sair.center(26,"#")}
 => """
 
-while True:
-    opcao = input(menu)
-    if opcao == "1":
-        cadastrar_usuario()
-    elif opcao == "2":
-        cadastrar_conta()
-    elif opcao == "3":
-        depositar()
-    elif opcao == "4":
-        sacar()
-    elif opcao == "5":
-        imprimir()
-    elif opcao == "6":
-        print(f"{nome_correntista}, obrigado por estar conosco.")
-        break
-
 def cadastrar_usuario():
     #definir atividades
     tmp_cpf: input("digite o numero do CPF:\n")
@@ -47,6 +39,8 @@ def cadastrar_usuario():
 
 def cadastrar_conta():
     #definir atividades
+    print(lista_contas[0],lista_usuarios[0]["cpf"])
+    
     return
 
 def sacar():
@@ -61,3 +55,24 @@ def imprimir():
     #definir atividades
     return
 
+def saindo(nome):
+    if nome is True:
+        print(f"{nome}, foi um prazer ajudar você!")
+    else:
+        print("Obrigado por usar o banco X.")
+
+while True:
+    opcao = input(menu)
+    if opcao == "1":
+        cadastrar_usuario()
+    elif opcao == "2":
+        cadastrar_conta()
+    elif opcao == "3":
+        depositar()
+    elif opcao == "4":
+        sacar()
+    elif opcao == "5":
+        imprimir()
+    elif opcao == "6":
+        saindo(nome_correntista)
+        break
