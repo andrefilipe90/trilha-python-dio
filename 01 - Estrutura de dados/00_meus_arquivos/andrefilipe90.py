@@ -49,11 +49,14 @@ def cadastrar_usuario(cpf):
     temp_nome = input("Informe o nome:")
     temp_nascimento = input("informe a data de nascimento dd/mm/aaaa:")
     temp_endereco = input("informe o endereço: rua, nº - bairro - cidade/ES:")
-    temp_dict = {"cpf":temp_cpf,"nome":temp_nome,"nascimento":temp_nascimento,"endereço":temp_endereco}
+    temp_dict = {"cpf":cpf,"nome":temp_nome,"nascimento":temp_nascimento,"endereço":temp_endereco}
     lista_usuarios.append(temp_dict)
     criar_conta = input("gostaria de criar uma conta? [s]sim ou [n]não:")
     if criar_conta == "s":
-        cadastrar_conta(agencia="0001",cpf=temp_cpf)
+        print(temp_dict)
+        print(cpf)
+        print(temp_cpf)
+        cadastrar_conta(agencia="0001",cpf=cpf)
         return
     elif criar_conta == "n":
         return
@@ -63,22 +66,23 @@ def cadastrar_usuario(cpf):
 
 def cadastrar_conta(cpf,agencia):
     print("passou cadastrar_conta")
-    limpa_tela()
+    #limpa_tela()
     temp_agencia = agencia
+    print(cpf)
     cpf_valido = teste_cpf(cpf)
     if cpf_valido == cpf:
         for usuario in lista_usuarios:
             if usuario["cpf"] == cpf:
                 temp_conta= 1+ int(lista_contas[-1]["conta"])
                 temp_cheque_especial = int(input("informar limite cheque especial:"))
-                lista_contas.append = {"conta":temp_conta,
+                lista_contas.append({"conta":temp_conta,
                                        "agencia":temp_agencia,
                                        "cpf":cpf,
                                        "saldo":0,
                                        "cheque_especial":temp_cheque_especial,
                                        "n_saques":0,
                                        "extrato":""
-                                       }
+                                       })
     else:
         temp_cpf = str(input("Não encontrado, informe o CPF:"))
         cadastrar_usuario(temp_cpf)
@@ -113,6 +117,7 @@ def saindo(nome):
 
 def teste_cpf(cpf):
     print("passou por teste_cpf")
+    print(cpf)
     for usuario in lista_usuarios:
     #habilitar validação de CPF com regras de existencia de CPF.
         if usuario["cpf"] == cpf:
