@@ -9,8 +9,8 @@
 '''rev01:
 
 parei na correção da linha 168, agencia key error
-falta adicionar extrato
-falta adicionar limite de saques diario
+falta testar extrato
+falta testar limite de saques diario
 
 as funcoes devem fazer passagem de argumentos por posicao e nomeados (variar os casos)
 
