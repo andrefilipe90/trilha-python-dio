@@ -4,23 +4,24 @@
 # cadastrar usuario (cliente) e cadastrar conta bancaria (conta para esse cliente)
 # armazenar usuarios em uma lista, composto por nome, data de nascimento, cpf e endereco
 # endereço(str) em formato string Rua, numero - bairro - cidade/sigla estado. cpf só o numero
+# as funcoes devem fazer passagem de argumentos por posicao e nomeados (variar os casos)
 # cadastrar_usuario: não pode haver numeros duplicados de CPF (string)para vincular um
 # usuario a uma conta, filtrar lista por CPF.
+# Saque: argumentos: keyword only: saque(saldo="variavel_saldo"...)
+# Saque: usar argumentos: (saldo, valor, extrato, limite, numero_saques,limite_saques)
+# Saque: retornos: saldo e extrato
+# parei na correção da linha 168, agencia key error
+# falta testar extrato
+
+# deposito: argumentos: positional only: deposito(saldo,valor...)
+# deposito: saldo, valor, extrato
+# deposito: retornos: saldo e extrato
+
 '''rev01:
 
-parei na correção da linha 168, agencia key error
-falta testar extrato
 falta testar limite de saques diario
+implementar, atualizar lista_conta
 
-as funcoes devem fazer passagem de argumentos por posicao e nomeados (variar os casos)
-
-Saque: argumentos: keyword only: saque(saldo="variavel_saldo"...)
-Saque: usar argumentos: (saldo, valor, extrato, limite, numero_saques,limite_saques)
-Saque: retornos: saldo e extrato
-
-deposito: argumentos: positional only: deposito(saldo,valor...)
-deposito: saldo, valor, extrato
-deposito: retornos: saldo e extrato
 
 extrato: positional only e keywork only: extrato(saldo,extrato="variavel_extrato")
 
