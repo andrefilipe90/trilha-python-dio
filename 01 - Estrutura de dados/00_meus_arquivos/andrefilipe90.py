@@ -41,7 +41,7 @@ menu = f"""
 => """
 
 def cadastrar_usuario(cpf):
-    print("passou cadastrar_usuario")
+    # print("passou cadastrar_usuario")
     limpa_tela()
     temp_cpf = teste_cpf(cpf)
     if temp_cpf == cpf:
@@ -53,9 +53,9 @@ def cadastrar_usuario(cpf):
     lista_usuarios.append(temp_dict)
     criar_conta = input("gostaria de criar uma conta? [s]sim ou [n]não:")
     if criar_conta == "s":
-        print(temp_dict)
-        print(cpf)
-        print(temp_cpf)
+        # print(temp_dict)
+        # print(cpf)
+        # print(temp_cpf)
         cadastrar_conta(agencia="0001",cpf=cpf)
         return
     elif criar_conta == "n":
@@ -65,10 +65,10 @@ def cadastrar_usuario(cpf):
     return
 
 def cadastrar_conta(cpf,agencia):
-    print("passou cadastrar_conta")
+    # print("passou cadastrar_conta")
     #limpa_tela()
     temp_agencia = agencia
-    print(cpf)
+    # print(cpf)
     cpf_valido = teste_cpf(cpf)
     if cpf_valido == cpf:
         for usuario in lista_usuarios:
@@ -91,7 +91,7 @@ def cadastrar_conta(cpf,agencia):
 def depositar(valor):
     limpa_tela()
     #definir atividades
-    print(conta_ativa)
+    # print(conta_ativa)
     if valor > 0:
         conta_ativa["saldo"] += valor
         print(conta_ativa["saldo"])
@@ -103,7 +103,7 @@ def depositar(valor):
 def sacar(valor):
     limpa_tela()
     #definir atividades
-    print(conta_ativa)
+    # print(conta_ativa)
     if valor > 0:
         conta_ativa["saldo"] -= valor
         print(conta_ativa["saldo"])
@@ -128,8 +128,8 @@ def saindo(nome):
         print("Obrigado por usar o banco X.")
 
 def teste_cpf(cpf):
-    print("passou por teste_cpf")
-    print(cpf)
+    # print("passou por teste_cpf")
+    # print(cpf)
     for usuario in lista_usuarios:
     #habilitar validação de CPF com regras de existencia de CPF.
         if usuario["cpf"] == cpf:
@@ -141,7 +141,7 @@ def teste_cpf(cpf):
             return
         
 def validar_conta(conta):
-    print("passou validar_conta")
+    # print("passou validar_conta")
     for contas in lista_contas:
         if int(conta) == contas["conta"]:
             #limpa_tela()
@@ -152,12 +152,12 @@ def validar_conta(conta):
                     usuario_ativo = usuario
             global conta_ativa
             conta_ativa = contas
-            print(conta_ativa)
+            # print(conta_ativa)
             return True
     return False    
     
 def atualiza_conta():
-    print("passou atualiza_conta")
+    # print("passou atualiza_conta")
     for conta in lista_contas:
         if conta_ativa["conta"] == conta["conta"]:
             conta.update(conta_ativa)
@@ -178,14 +178,14 @@ while True:
             agencia = input("informe o numero da agencia com 4 digitos:")
             conta = input("informe o numero da conta:")
             validade_conta = validar_conta(conta)
-            print(f"chegou aqui: {validade_conta}")
+            #print(f"chegou aqui: {validade_conta}")
             if  validade_conta == True:
-                print("if validar_conta == True")
+                # print("if validar_conta == True")
                 temp_valor = float(input("informe o valor para deposito:"))
                 depositar(temp_valor)
             elif validade_conta == False:
-                print("if validar_conta == False")
-                print("Tente Novamente, conta não encontrada.")
+                # print("if validar_conta == False")
+                # print("Tente Novamente, conta não encontrada.")
     elif opcao == "4":
         if conta_ativa:
             temp_valor = float(input("informe o valor para saque:"))
@@ -194,14 +194,14 @@ while True:
             agencia = input("informe o numero da agencia com 4 digitos:")
             conta = input("informe o numero da conta:")
             validade_conta = validar_conta(conta)
-            print(f"chegou aqui: {validade_conta}")
+            # print(f"chegou aqui: {validade_conta}")
             if  validade_conta == True:
-                print("if validar_conta == True")
+                # print("if validar_conta == True")
                 temp_valor = float(input("informe o valor para saque:"))
                 sacar(valor=temp_valor)
             elif validade_conta == False:
-                print("if validar_conta == False")
-                print("Tente Novamente, conta não encontrada.")
+                # print("if validar_conta == False")
+                # print("Tente Novamente, conta não encontrada.")
     elif opcao == "5":
         if conta_ativa:
             imprimir(conta_ativa["saldo"],extrato=conta_ativa["extrato"])
@@ -209,12 +209,12 @@ while True:
             agencia = input("informe o numero da agencia com 4 digitos:")
             conta = input("informe o numero da conta:")
             validade_conta = validar_conta(conta)
-            print(f"chegou aqui: {validade_conta}")
+            # print(f"chegou aqui: {validade_conta}")
             if  validade_conta == True:
-                print("if validar_conta == True")
+                # print("if validar_conta == True")
                 imprimir(conta_ativa["saldo"],extrato=conta_ativa["extrato"])
             elif validade_conta == False:
-                print("if validar_conta == False")
+                # print("if validar_conta == False")
                 print("Tente Novamente, conta não encontrada.")
     elif opcao == "7":
         limpa_tela()
