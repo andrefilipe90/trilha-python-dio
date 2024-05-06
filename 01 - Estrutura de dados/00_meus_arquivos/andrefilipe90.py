@@ -41,7 +41,7 @@ menu = f"""
 => """
 
 def cadastrar_usuario(cpf):
-    print("passou cadastrar_usuario")
+    # print("passou cadastrar_usuario")
     limpa_tela()
     temp_cpf = teste_cpf(cpf)
     if temp_cpf == cpf:
@@ -49,11 +49,14 @@ def cadastrar_usuario(cpf):
     temp_nome = input("Informe o nome:")
     temp_nascimento = input("informe a data de nascimento dd/mm/aaaa:")
     temp_endereco = input("informe o endereço: rua, nº - bairro - cidade/ES:")
-    temp_dict = {"cpf":temp_cpf,"nome":temp_nome,"nascimento":temp_nascimento,"endereço":temp_endereco}
+    temp_dict = {"cpf":cpf,"nome":temp_nome,"nascimento":temp_nascimento,"endereço":temp_endereco}
     lista_usuarios.append(temp_dict)
     criar_conta = input("gostaria de criar uma conta? [s]sim ou [n]não:")
     if criar_conta == "s":
-        cadastrar_conta(agencia="0001",cpf=temp_cpf)
+        # print(temp_dict)
+        # print(cpf)
+        # print(temp_cpf)
+        cadastrar_conta(agencia="0001",cpf=cpf)
         return
     elif criar_conta == "n":
         return
@@ -62,46 +65,59 @@ def cadastrar_usuario(cpf):
     return
 
 def cadastrar_conta(cpf,agencia):
-    print("passou cadastrar_conta")
-    limpa_tela()
+    # print("passou cadastrar_conta")
+    #limpa_tela()
     temp_agencia = agencia
+    # print(cpf)
     cpf_valido = teste_cpf(cpf)
     if cpf_valido == cpf:
         for usuario in lista_usuarios:
             if usuario["cpf"] == cpf:
                 temp_conta= 1+ int(lista_contas[-1]["conta"])
                 temp_cheque_especial = int(input("informar limite cheque especial:"))
-                lista_contas.append = {"conta":temp_conta,
+                lista_contas.append({"conta":temp_conta,
                                        "agencia":temp_agencia,
                                        "cpf":cpf,
                                        "saldo":0,
                                        "cheque_especial":temp_cheque_especial,
                                        "n_saques":0,
                                        "extrato":""
-                                       }
+                                       })
     else:
         temp_cpf = str(input("Não encontrado, informe o CPF:"))
         cadastrar_usuario(temp_cpf)
     return
 
-def depositar(agencia,conta):
+def depositar(valor):
     limpa_tela()
     #definir atividades
-    valor = float(input("informe o valor para deposito:"))
+    # print(conta_ativa)
     if valor > 0:
         conta_ativa["saldo"] += valor
-        conta_ativa["extrato"].append(f"Deposito de R$ {valor}")
-
+        print(conta_ativa["saldo"])
+        conta_ativa["extrato"] += f"Deposito de R$ {valor}\n"
+        print(conta_ativa["extrato"])
+        atualiza_conta()
     return
 
-def sacar():
+def sacar(valor):
     limpa_tela()
     #definir atividades
+    # print(conta_ativa)
+    if valor > 0:
+        conta_ativa["saldo"] -= valor
+        print(conta_ativa["saldo"])
+        conta_ativa["extrato"] += f"Saque de R$ {valor}\n"
+        print(conta_ativa["extrato"])
+        atualiza_conta()
     return
 
-def imprimir():
+def imprimir(saldo,extrato):
     limpa_tela()
     #definir atividades
+    print(extrato)
+    print("\n########################\n")
+    print(f"Saldo atual é R$ {saldo}")
     return
 
 def saindo(nome):
@@ -112,7 +128,8 @@ def saindo(nome):
         print("Obrigado por usar o banco X.")
 
 def teste_cpf(cpf):
-    print("passou por teste_cpf")
+    # print("passou por teste_cpf")
+    # print(cpf)
     for usuario in lista_usuarios:
     #habilitar validação de CPF com regras de existencia de CPF.
         if usuario["cpf"] == cpf:
@@ -124,55 +141,81 @@ def teste_cpf(cpf):
             return
         
 def validar_conta(conta):
-    print("passou validar_conta")
+    # print("passou validar_conta")
     for contas in lista_contas:
         if int(conta) == contas["conta"]:
             #limpa_tela()
             print("conta encontrada")
             for usuario in lista_usuarios:
                 if contas["cpf"] == usuario["cpf"]:
-                    #global usuario_ativo
+                    global usuario_ativo
                     usuario_ativo = usuario
-            #global conta_ativa
+            global conta_ativa
             conta_ativa = contas
-            print(conta_ativa)
+            # print(conta_ativa)
             return True
     return False    
     
-def atualiza_conta(conta_ativa):
-    print("passou atualiza_conta")
+def atualiza_conta():
+    # print("passou atualiza_conta")
     for conta in lista_contas:
         if conta_ativa["conta"] == conta["conta"]:
             conta.update(conta_ativa)
+
 while True:
     opcao = input(menu)
     if opcao == "1":
         temp_cpf = str(input("informe o CPF:"))
-        cadastrar_usuario(temp_cpf)
+        cadastrar_usuario(cpf=temp_cpf)
     elif opcao == "2":
         temp_cpf = input("Informe o CPF a cadastrar conta:")
         cadastrar_conta(temp_cpf,"0001")
     elif opcao == "3":
-        print("opção 3")
         if conta_ativa:
-            print("if conta_ativa")
-            depositar(conta_ativa["agencia"],conta_ativa["conta"])
+            temp_valor = float(input("informe o valor para deposito:"))
+            depositar(valor=temp_valor)
         else:
-            print("conta_ativa else")
             agencia = input("informe o numero da agencia com 4 digitos:")
             conta = input("informe o numero da conta:")
             validade_conta = validar_conta(conta)
-            print(f"chegou aqui: {validade_conta}")
+            #print(f"chegou aqui: {validade_conta}")
             if  validade_conta == True:
-                #print("if validar_conta == True")
-                depositar(conta_ativa["agencia"],conta_ativa["conta"])
+                # print("if validar_conta == True")
+                temp_valor = float(input("informe o valor para deposito:"))
+                depositar(temp_valor)
             elif validade_conta == False:
-                print("if validar_conta == False")
-                print("Tente Novamente, conta não encontrada.")
+                # print("if validar_conta == False")
+                # print("Tente Novamente, conta não encontrada.")
     elif opcao == "4":
-        sacar()
+        if conta_ativa:
+            temp_valor = float(input("informe o valor para saque:"))
+            sacar(valor=temp_valor)
+        else:
+            agencia = input("informe o numero da agencia com 4 digitos:")
+            conta = input("informe o numero da conta:")
+            validade_conta = validar_conta(conta)
+            # print(f"chegou aqui: {validade_conta}")
+            if  validade_conta == True:
+                # print("if validar_conta == True")
+                temp_valor = float(input("informe o valor para saque:"))
+                sacar(valor=temp_valor)
+            elif validade_conta == False:
+                # print("if validar_conta == False")
+                # print("Tente Novamente, conta não encontrada.")
     elif opcao == "5":
-        imprimir()
+        if conta_ativa:
+            imprimir(conta_ativa["saldo"],extrato=conta_ativa["extrato"])
+        else:
+            agencia = input("informe o numero da agencia com 4 digitos:")
+            conta = input("informe o numero da conta:")
+            validade_conta = validar_conta(conta)
+            # print(f"chegou aqui: {validade_conta}")
+            if  validade_conta == True:
+                # print("if validar_conta == True")
+                imprimir(conta_ativa["saldo"],extrato=conta_ativa["extrato"])
+            elif validade_conta == False:
+                # print("if validar_conta == False")
+                print("Tente Novamente, conta não encontrada.")
     elif opcao == "7":
         limpa_tela()
         for usuario in lista_usuarios:
