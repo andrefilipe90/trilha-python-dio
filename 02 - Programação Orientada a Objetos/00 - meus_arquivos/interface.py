@@ -23,7 +23,8 @@ class AppleTV(Controle_remoto):
     def ligar(self):
         print("apple")
     
-    def
+    def desligar(self):
+        print("Desligando. :)~")
 ctrl = ControleTV()
 
 print(ctrl.ligar())
