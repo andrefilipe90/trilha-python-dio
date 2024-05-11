@@ -3,6 +3,7 @@ from datetime import datetime
 
 # Classe CLiente mantem o registro dos numeros das contas
 # Dá entrada nas transações mediante 
+# fazer menu com match case
 class Cliente:
     def __init__(self, endereco):
         self.endereco = endereco
