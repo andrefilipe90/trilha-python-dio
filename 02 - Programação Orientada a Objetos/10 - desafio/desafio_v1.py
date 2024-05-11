@@ -1,7 +1,8 @@
-from abc import ABC, abstractclassmethod, abstractproperty
+from abc import ABC, abstractmethod
 from datetime import datetime
 
-
+# Classe CLiente mantem o registro dos numeros das contas
+# Dá entrada nas transações mediante 
 class Cliente:
     def __init__(self, endereco):
         self.endereco = endereco
@@ -13,7 +14,7 @@ class Cliente:
     def adicionar_conta(self, conta):
         self.contas.append(conta)
 
-
+# Registra os detalhes cadastrais da classe cliente
 class PessoaFisica(Cliente):
     def __init__(self, nome, data_nascimento, cpf, endereco):
         super().__init__(endereco)
@@ -135,11 +136,11 @@ class Historico:
 
 class Transacao(ABC):
     @property
-    @abstractproperty
+    @abstractmethod
     def valor(self):
         pass
 
-    @abstractclassmethod
+    @abstractmethod
     def registrar(self, conta):
         pass
 
