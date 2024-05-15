@@ -2,15 +2,22 @@ import os
 import shutil
 from pathlib import Path
 
+print(Path(__file__).parent)
 ROOT_PATH = Path(__file__).parent
 
-os.mkdir(ROOT_PATH / "novo-diretorio")
+os.rename(ROOT_PATH / 'pasta_teste22', ROOT_PATH / 'pasta_teste2')
 
-arquivo = open(ROOT_PATH / "novo.txt", "w")
-arquivo.close()
+os.remove(ROOT_PATH / 'pasta_teste2')
 
-os.rename(ROOT_PATH / "novo.txt", ROOT_PATH / "alterado.txt")
+# os.mkdir(ROOT_PATH / 'pasta_teste')
 
-os.remove(ROOT_PATH / "alterado.txt")
+# os.mkdir(ROOT_PATH / "novo-diretorio")
 
-shutil.move(ROOT_PATH / "novo.txt", ROOT_PATH / "novo-diretorio" / "novo.txt")
+# arquivo = open(ROOT_PATH / "novo.txt", "w")
+# arquivo.close()
+
+# os.rename(ROOT_PATH / "novo.txt", ROOT_PATH / "alterado.txt")
+
+# os.remove(ROOT_PATH / "alterado.txt")
+
+# shutil.move(ROOT_PATH / "novo.txt", ROOT_PATH / "novo-diretorio" / "novo.txt")
