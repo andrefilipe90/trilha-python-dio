@@ -1,7 +1,9 @@
 import os
 
+
 def limpa_tela():
     os.system('cls || clear')
+
 
 limpa_tela()
 
@@ -9,17 +11,17 @@ global conta_ativa
 global usuario_ativo
 conta_ativa = {}
 usuario_ativo = {}
-lista_usuarios = [{"cpf":"05843914712",
-                   "nome":"André Filipe Guering de Mattos",
-                   "nascimento":"14/05/1990",
-                   "endereço":"Rua Roberto Fritzgerald Kennedy,40 - Cavaleiros - Macaé/RJ"}]
-lista_contas = [{"conta":1,
-                 "agencia":"0001",
-                 "cpf":"05843914712",
-                 "saldo":100,
-                 "cheque_especial":100,
-                 "n_saques":0,
-                 "extrato":""
+lista_usuarios = [{"cpf": "05843914712",
+                   "nome": "André Filipe Guering de Mattos",
+                   "nascimento": "14/05/1990",
+                   "endereço": "Rua Roberto Fritzgerald Kennedy,40 - Cavaleiros - Macaé/RJ"}]
+lista_contas = [{"conta": 1,
+                 "agencia": "0001",
+                 "cpf": "05843914712",
+                 "saldo": 100,
+                 "cheque_especial": 100,
+                 "n_saques": 0,
+                 "extrato": ""
                  }] #definir tipo
 cad_usuario = " Cadastro Usuario "
 cad_conta = " Cadastro Conta "
@@ -31,12 +33,12 @@ sair = " Sair "
 menu = f"""
 ##############################
 
-[1] {cad_usuario.center(26,"#")}
-[2] {cad_conta.center(26,"#")}
-[3] {depositar.center(26,"#")}
-[4] {sacar.center(26,"#")}
-[5] {extrato.center(26,"#")}
-[6] {sair.center(26,"#")}
+[1] {cad_usuario.center(26, "#")}
+[2] {cad_conta.center(26, "#")}
+[3] {depositar.center(26, "#")}
+[4] {sacar.center(26, "#")}
+[5] {extrato.center(26, "#")}
+[6] {sair.center(26, "#")}
 
 => """
 
@@ -49,7 +51,9 @@ def cadastrar_usuario(cpf):
     temp_nome = input("Informe o nome:")
     temp_nascimento = input("informe a data de nascimento dd/mm/aaaa:")
     temp_endereco = input("informe o endereço: rua, nº - bairro - cidade/ES:")
-    temp_dict = {"cpf":cpf,"nome":temp_nome,"nascimento":temp_nascimento,"endereço":temp_endereco}
+    temp_dict = {"cpf": cpf, "nome": temp_nome,
+                 "nascimento": temp_nascimento,
+                 "endereço": temp_endereco}
     lista_usuarios.append(temp_dict)
     criar_conta = input("gostaria de criar uma conta? [s]sim ou [n]não:")
     if criar_conta == "s":
@@ -185,7 +189,7 @@ while True:
                 depositar(temp_valor)
             elif validade_conta == False:
                 # print("if validar_conta == False")
-                # print("Tente Novamente, conta não encontrada.")
+                print("Tente Novamente, conta não encontrada.")
     elif opcao == "4":
         if conta_ativa:
             temp_valor = float(input("informe o valor para saque:"))
@@ -201,7 +205,7 @@ while True:
                 sacar(valor=temp_valor)
             elif validade_conta == False:
                 # print("if validar_conta == False")
-                # print("Tente Novamente, conta não encontrada.")
+                print("Tente Novamente, conta não encontrada.")
     elif opcao == "5":
         if conta_ativa:
             imprimir(conta_ativa["saldo"],extrato=conta_ativa["extrato"])
