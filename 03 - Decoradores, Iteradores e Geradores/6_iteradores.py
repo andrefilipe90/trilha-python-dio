@@ -10,10 +10,12 @@ class MeuIterador:
         try:
             numero = self.numeros[self.contador]
             self.contador += 1
+            print(f"{numero}: {self.contador}")
             return numero * 2
+            
         except IndexError:
             raise StopIteration
 
 
-for i in MeuIterador(numeros=[38, 13, 11]):
+for i in MeuIterador(numeros=[1000, 38, 13, 11,300]):
     print(i)

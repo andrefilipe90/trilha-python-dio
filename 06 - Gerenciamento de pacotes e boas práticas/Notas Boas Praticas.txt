@@ -1,0 +1,6 @@
+pipenv - ambientes organizandos de pacotes pip
+pip install flake8
+flake8
+linter - primeira ferramenta que verifica codigo (inspeção)
+formatters - black organizador de codigo automático
+isort - organização de imports
