@@ -1,0 +1,14 @@
+{
+"_id": 1,
+"nome": "André Mattos",
+"idade": 34,
+"data_nascimento": "1990-05-14",
+"endereco": "Rua dos bobos, 0 - Macaé - RJ",
+"enderecos": [{
+"rua": "Rua dos bobos",
+"numero": 0,
+"bairro": null,
+"cidade": "Macae",
+"estado": "RJ"
+}]
+}

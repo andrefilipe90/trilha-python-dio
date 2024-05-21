@@ -1,48 +1,40 @@
 # Classe UsuarioTelefone e o encapsulamento dos atributos nome, numero e plano:
 class UsuarioTelefone:
-    def __init__(self, nome, numero, plano):
-        self._nome = nome
-        self._numero = numero
-        self._plano = plano
-        print(f"UsuarioTelefone inicializado: {self._nome}, {self._numero}, plano saldo: {self._plano.verificar_saldo()}")
-
+  def __init__(self, nome, numero, plano):
+    self.nome = nome
+    self.numero = numero
+    self._plano = plano
 
 # TODO: Crie um método fazer_chamada para permitir que um usuário faça uma chamada telefônica:
-    def fazer_chamada(self, destinatario,duracao):
+  def fazer_chamada(self, destinatario, duracao):  
 # TODO: Calcule o custo da chamada usando o método 'custo_chamada' do objeto 'plano':
-        custo = self._plano.custo_chamada(duracao)
-        print(f"Custo da chamada: {custo}")
+    custo = self._plano.custo_chamada(duracao)
 # TODO: Verifique se o saldo do plano é suficiente para a chamada.
-        if self._plano.verificar_saldo() >= custo:
+    if custo <= self._plano.verificar_saldo():
 # TODO: Se o saldo for suficiente, deduz o custo da chamada do saldo do plano.
-            self._plano.deduzir_saldo(custo)
+      self._plano.deduzir_saldo(custo)
 # TODO: E retorne uma mensagem de sucesso com o destinatário e o saldo restante após a chamada:
-            return (f"Chamada para {destinatario}")
-
+      return f"Chamada para {destinatario} realizada com sucesso. Saldo: ${self._plano.saldo:.2f}"
+    else:
+      return "Saldo insuficiente para fazer a chamada."
 # Classe Pano, ela representa o plano de um usuário de telefone:
-# TODO: Crie um método para verificar_saldo e retorne o saldo atual:
-# TODO: Crie um método custo_chamada para calcular o custo de uma chamada supondo o custo de $0.10 por minuto:
-# TODO: Crie um método deduzir_saldo para deduz o valor do saldo do plano:
 class Plano:
-    def __init__(self, saldo_inicial):
-        self.saldo = saldo_inicial
-        print(f"Plano inicializado com saldo: {self.saldo}")
+  def __init__(self, saldo_inicial):
+    self.saldo = saldo_inicial
 
-    def verificar_saldo(self):
-        return self.saldo
-    
-    def custo_chamada(self, duracao):
-        return duracao*0.1
-    
-    def deduzir_saldo(self, a_deduzir):
-        self.saldo -= a_deduzir
-
-
+# TODO: Crie um método para verificar_saldo e retorne o saldo atual:
+  def verificar_saldo(self):
+    return self.saldo
+# TODO: Crie um método custo_chamada para calcular o custo de uma chamada supondo o custo de $0.10 por minuto:
+  def custo_chamada(self, duracao):
+    return duracao * 0.1
+# TODO: Crie um método deduzir_saldo para deduz o valor do saldo do plano:
+  def deduzir_saldo(self, a_deduzir):
+    self.saldo -= a_deduzir
 # Classe UsuarioPrePago, aqui vemos a herança onde UsuarioPrePago herda os atributos e métodos da classe UsuarioTelefone:
 class UsuarioPrePago(UsuarioTelefone):
-    def __init__(self, nome, numero, saldo_inicial):
-        super().__init__(nome, numero, Plano(saldo_inicial))
-
+  def __init__(self, nome, numero, saldo_inicial):
+    super().__init__(nome, numero, Plano(saldo_inicial))
 
 # Recebendo as informações do usuário:
 nome = input()
